@@ -1,4 +1,5 @@
-const mazeRD = (cells, stack, current, numRows, numCols, removeWall, running) => {
+const mazeRD = (cells, stack, current, numRows, numCols, removeWall, running, speed) => {
+  console.log(speed);
   if(!running[0]) {
     cells[current].isCurrent = false;
     return;
@@ -30,11 +31,11 @@ const mazeRD = (cells, stack, current, numRows, numCols, removeWall, running) =>
       removeWall(current, next);
       stack.push(next);
     }
-    setTimeout(() => mazeRD(cells, stack, current, numRows, numCols, removeWall,running),40);
+    setTimeout(() => mazeRD(cells, stack, current, numRows, numCols, removeWall,running, speed),speed);
     return;
 }
 
-const mazeRB = (cells, stack, current, numRows, numCols, removeWall, running) => {
+const mazeRB = (cells, stack, current, numRows, numCols, removeWall, running, speed) => {
   if(!running[0]) {
     cells[current].isCurrent = false;
     return;
@@ -66,7 +67,7 @@ const mazeRB = (cells, stack, current, numRows, numCols, removeWall, running) =>
       removeWall(current, next);
       stack.push(next);
     }
-    setTimeout(() => mazeRB(cells, stack, current, numRows, numCols, removeWall,running),40);
+    setTimeout(() => mazeRB(cells, stack, current, numRows, numCols, removeWall,running, speed),speed);
     return;
 }
 

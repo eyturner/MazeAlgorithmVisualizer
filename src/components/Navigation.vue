@@ -12,7 +12,13 @@
       </div>
       <div class="navitem" id="run" v-on:click="sendRunMsg">Visualize!</div>
       <div class="navitem" id="clear" v-on:click="sendClearMsg">Clear</div>
-      <div class="navitem" id="speed">Change Speed</div>
+      <div class="navitem dropdown sliderDiv" id="speed">Change Speed
+        <div class="dropdown-content" id="slider">
+          <span>Slow</span>
+          <input type="range" min="20" max="200" ref="slider" value="160" v-on:input="updateSpeed()">
+          <span>Fast</span>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -22,7 +28,7 @@ export default {
   data() {
     return{
       algorithms: ['Recursive BFS', 'Recursive DFS'],
-      currentAlgo: 'Recursive DFS'
+      currentAlgo: 'Recursive DFS',
     }
   },
   methods: {
@@ -34,6 +40,10 @@ export default {
     },
     setCurrentAlgo(newAlgo) {
       this.currentAlgo = newAlgo;
+    },
+    updateSpeed() {
+      let newSpeed = this.$refs.slider.value;
+      this.$root.$emit('updateSpeed', newSpeed);
     }
   }
 }
@@ -113,5 +123,19 @@ export default {
 a:hover {
   display: block;
   background: rgb(25, 134, 100);
+}
+
+#slider {
+  display: none;
+}
+
+.sliderDiv:hover #slider{
+  display: flex;
+  justify-content: space-around;
+  height: 30px;
+}
+
+#slider span {
+  margin-top: 3px;
 }
 </style>

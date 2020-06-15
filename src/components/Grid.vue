@@ -30,6 +30,7 @@ export default {
       stack: [],
       current: 0,
       running: [false], // Set as array so algorithms can recognize when clear() is called
+      speed: 40,
     }
   },
 
@@ -118,10 +119,12 @@ export default {
       if(!this.running[0]) {
         this.running[0] = true;
         if(algo == 'Recursive BFS') {
-          mazeRB(this.cells, this.stack, this.current, numRows, numCols, this.removeWall, this.running);
-        } else {
-          mazeRD(this.cells, this.stack, this.current, numRows, numCols, this.removeWall, this.running);
-        }
+          mazeRB(this.cells, this.stack, this.current, numRows, numCols, this.removeWall, this.running, this.speed);
+          } else {
+            console.log("Running with speed:", this.speed);
+            
+          mazeRD(this.cells, this.stack, this.current, numRows, numCols, this.removeWall, this.running, this.speed);
+          }
         
         }
       });
@@ -129,6 +132,10 @@ export default {
       this.running[0] = false;
       this.clearGrid();
       });
+
+    this.$root.$on('updateSpeed',(newSpeed) => {
+      this.speed = 220 - newSpeed;
+    });
   }
 }
 </script>
